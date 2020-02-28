@@ -48,7 +48,10 @@
       "titus/": ["titus/src"],
       "@spinnaker/huaweicloud": ["huaweicloud/src"],
       "huaweicloud/*": ["huaweicloud/src/*"],
-      "huaweicloud": ["huaweicloud/src"]
+      "huaweicloud": ["huaweicloud/src"],
+      "@spinnaker/yandex": ["yandex/src"],
+      "yandex/*": ["yandex/src/*"],
+      "yandex/": ["yandex/src"]
     },
     "pretty": true,
     "removeComments": true,

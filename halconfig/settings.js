@@ -1,3 +1,19 @@
+/*
+ * Copyright 2020 Netflix, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 'use strict';
 
 var gateHost = '{%gate.baseUrl%}';
@@ -121,6 +137,12 @@ var oracle = {
   },
 };
 
+var yandex = {
+  defaults: {
+    account: '{%yandex.default.account%}',
+  },
+};
+
 window.spinnakerSettings = {
   authEnabled: authEnabled,
   authEndpoint: authEndpoint,
@@ -156,6 +178,7 @@ window.spinnakerSettings = {
     'kubernetes',
     'oracle',
     'titus',
+    'yandex',
   ],
   defaultTimeZone: timezone, // see http://momentjs.com/timezone/docs/#/data-utilities/
   feature: {
@@ -230,6 +253,7 @@ window.spinnakerSettings = {
         region: 'us-east-1',
       },
     },
+    yandex: yandex,
   },
   pubsubProviders: ['google'], // TODO(joonlim): Add amazon once it is confirmed that amazon pub/sub works.
   plugins: '{{%plugins%}}',

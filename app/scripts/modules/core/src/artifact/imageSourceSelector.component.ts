@@ -1,7 +1,23 @@
+/*
+ * Copyright 2020 Netflix, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { IComponentOptions, module } from 'angular';
 
-const imageSourceSelectorComponent: IComponentOptions = {
-  bindings: { command: '=', imageSources: '<', helpFieldKey: '@', idField: '@', imageSourceText: '<' },
+export const imageSourceSelectorComponent: IComponentOptions = {
+  bindings: { command: '=', imageSources: '<', helpFieldKey: '@', idField: '@', imageSourceText: '<', onChange: '<?' },
   controllerAs: 'ctrl',
   template: `
     <div class="form-group" ng-if="ctrl.imageSourceText">
@@ -21,7 +37,7 @@ const imageSourceSelectorComponent: IComponentOptions = {
         <div class="col-md-7">
           <div class="radio" ng-repeat="imageSource in ctrl.imageSources">
             <label>
-              <input type="radio" ng-model="ctrl.command[ctrl.idField]" value="{{ imageSource }}">
+              <input type="radio" ng-model="ctrl.command[ctrl.idField]" value="{{ imageSource }}" ng-change="ctrl.onChange('{{ imageSource }}')">
               {{ imageSource | robotToHuman }}
             </label>
           </div>
