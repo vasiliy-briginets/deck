@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-export * from './yandex.module';
+export { YANDEX_MODULE } from './yandex.module';
+
+// export * from './yandex.module';
 export * from './yandex.settings';
 
 // export * from './domain/index';

@@ -45,7 +45,7 @@ export class BakeStageChooseOSController implements IController {
   }
 }
 
-export const bakeStageChooseOsComponent: IComponentOptions = {
+const bakeStageChooseOsComponent: IComponentOptions = {
   bindings: {
     baseOsOptions: '<',
     model: '=',

@@ -83,6 +83,7 @@ export class YandexServerGroupCommandBuilder {
         disableStrategySelection: false,
         disableImageSelection: true,
         showImageSourceSelector: true,
+        // imageSourceText: 'priorStage',
       },
       serviceAccountId: conf.serviceAccountId,
       // capacity: _.cloneDeep(conf.capacity),

@@ -33,7 +33,7 @@ import '@spinnaker/cloudfoundry';
 import { AZURE_MODULE } from '@spinnaker/azure';
 import { HUAWEICLOUD_MODULE } from '@spinnaker/huaweicloud';
 import { DCOS_DCOS_MODULE } from './modules/dcos/dcos.module';
-import '@spinnaker/yandex';
+import { YANDEX_MODULE } from './modules/yandex/src';
 
 module('netflix.spinnaker', [
   CORE_MODULE,
@@ -50,5 +50,6 @@ module('netflix.spinnaker', [
   KUBERNETES_V2_MODULE,
   KAYENTA_MODULE,
   TITUS_MODULE,
+  YANDEX_MODULE,
   HUAWEICLOUD_MODULE,
 ]);
