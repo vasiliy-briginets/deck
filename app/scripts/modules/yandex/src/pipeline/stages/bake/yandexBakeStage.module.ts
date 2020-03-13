@@ -14,18 +14,10 @@
  * limitations under the License.
  */
 
-import {
-  ArtifactReferenceService,
-  ExecutionArtifactTab,
-  ExecutionDetailsTasks,
-  ExpectedArtifactService,
-  IArtifact,
-  IStage,
-  Registry,
-} from '@spinnaker/core';
-import { BakeManifestDetailsTab } from 'core/pipeline/config/stages/bakeManifest/BakeManifestDetailsTab';
+import { BakeExecutionLabel, ExecutionDetailsTasks, Registry } from '@spinnaker/core';
 import { ManualExecutionBakeManifest } from 'core/pipeline/config/stages/bakeManifest/ManualExecutionBakeManifest';
 import { YandexBakeStage } from 'yandex/pipeline/stages/bake/bakeStage';
+import { YandexBakeDetailsTab } from 'yandex/pipeline/stages/bake/YandexBakeDetailsTab';
 
 Registry.pipeline.registerStage({
   provides: 'bake',
@@ -36,17 +28,11 @@ Registry.pipeline.registerStage({
   component: YandexBakeStage,
   producesArtifacts: true,
   supportsCustomTimeout: true,
-  executionDetailsSections: [BakeManifestDetailsTab, ExecutionDetailsTasks, ExecutionArtifactTab],
-  artifactExtractor: (fields: string[]) =>
-    ExpectedArtifactService.accumulateArtifacts<IArtifact>(['inputArtifacts'])(fields).map((a: IArtifact) => a.id),
-  artifactRemover: (stage: IStage, artifactId: string) => {
-    ArtifactReferenceService.removeArtifactFromFields(['expectedArtifactId'])(stage, artifactId);
-
-    const artifactDoesNotMatch = (artifact: IArtifact) => artifact.id !== artifactId;
-    stage.expectedArtifacts = (stage.expectedArtifacts ?? []).filter(artifactDoesNotMatch);
-    stage.inputArtifacts = (stage.inputArtifacts ?? []).filter(artifactDoesNotMatch);
+  executionDetailsSections: [YandexBakeDetailsTab, ExecutionDetailsTasks],
+  executionLabelComponent: BakeExecutionLabel,
+  extraLabelLines: stage => {
+    return stage.masterStage.context.allPreviouslyBaked || stage.masterStage.context.somePreviouslyBaked ? 1 : 0;
   },
-  validators: [],
   restartable: true,
   manualExecutionComponent: ManualExecutionBakeManifest,
 });
