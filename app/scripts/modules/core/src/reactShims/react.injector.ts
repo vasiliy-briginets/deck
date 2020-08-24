@@ -1,3 +1,19 @@
+/*
+ * Copyright 2020 Netflix, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { IQService, IRootScopeService, IScope } from 'angular';
 import IInjectorService = angular.auto.IInjectorService;
 
@@ -19,6 +35,7 @@ import { SecurityGroupReader } from '../securityGroup/securityGroupReader.servic
 import { ServerGroupWriter } from '../serverGroup/serverGroupWriter.service';
 import { SkinSelectionService } from '../cloudProvider/skinSelection/skinSelection.service';
 import { StateEvents } from './state.events';
+import { LoadBalancerReader } from 'core/loadBalancer';
 
 export abstract class ReactInject {
   protected $injector: IInjectorService;
@@ -60,6 +77,7 @@ export class CoreReactInject extends ReactInject {
   public get serverGroupWriter() { return this.$injector.get('serverGroupWriter') as ServerGroupWriter; }
   public get stateEvents() { return this.$injector.get('stateEvents') as StateEvents; }
   public get skinSelectionService() { return this.$injector.get('skinSelectionService') as SkinSelectionService; }
+  public get loadBalancerReader() {return this.$injector.get('loadBalancerReader') as LoadBalancerReader;}
 
   private createStateService(): StateService {
     const wrappedState = Object.create(this.$injector.get('$state')) as StateService;

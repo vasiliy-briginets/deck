@@ -14,14 +14,29 @@
  * limitations under the License.
  */
 
-import { ILoadBalancer } from '@spinnaker/core';
-
-import { IYandexServerGroup } from 'yandex/domain';
+import { ILoadBalancer, ILoadBalancerUpsertCommand } from '@spinnaker/core';
+import { IYandexServerGroup } from '.';
 
 export interface IYandexLoadBalancer extends ILoadBalancer {
   id: string;
+  credentials?: string;
+  balancerType: string;
   serverGroups: IYandexServerGroup[];
-  // healthState?: string;
-  // instanceCounts?: IInstanceCounts;
-  // instances?: IInstance[];
+  listeners: IYandexLBListener[];
+}
+
+export interface IYandexLBListener {
+  name: string;
+  port: number;
+  targetPort: number;
+  protocol: string;
+  ipVersion: string;
+  address: string;
+  subnetId: string;
+}
+
+export interface IYandexLoadBalancerUpsertCommand extends ILoadBalancerUpsertCommand {
+  lbType: string;
+  serverGroups: IYandexServerGroup[];
+  listeners: IYandexLBListener[];
 }

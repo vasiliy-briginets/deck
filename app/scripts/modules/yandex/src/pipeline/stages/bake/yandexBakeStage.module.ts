@@ -15,8 +15,7 @@
  */
 
 import { BakeExecutionLabel, ExecutionDetailsTasks, Registry } from '@spinnaker/core';
-import { ManualExecutionBakeManifest } from 'core/pipeline/config/stages/bakeManifest/ManualExecutionBakeManifest';
-import { YandexBakeStage } from 'yandex/pipeline/stages/bake/bakeStage';
+import { YandexBakeStageConfig } from 'yandex/pipeline/stages/bake/YandexBakeStageConfig';
 import { YandexBakeDetailsTab } from 'yandex/pipeline/stages/bake/YandexBakeDetailsTab';
 
 Registry.pipeline.registerStage({
@@ -25,7 +24,7 @@ Registry.pipeline.registerStage({
   label: 'Bake',
   description: 'Bakes an image',
   key: 'bake',
-  component: YandexBakeStage,
+  component: YandexBakeStageConfig,
   producesArtifacts: true,
   supportsCustomTimeout: true,
   executionDetailsSections: [YandexBakeDetailsTab, ExecutionDetailsTasks],
@@ -34,5 +33,4 @@ Registry.pipeline.registerStage({
     return stage.masterStage.context.allPreviouslyBaked || stage.masterStage.context.somePreviouslyBaked ? 1 : 0;
   },
   restartable: true,
-  manualExecutionComponent: ManualExecutionBakeManifest,
 });
